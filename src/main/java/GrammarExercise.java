@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 public class GrammarExercise {
     public static void main(String[] args) {
-        //需要从命令行读入
         String firstWordList = "";
         String secondWordList = "";
 
@@ -16,12 +15,11 @@ public class GrammarExercise {
         System.out.println(firstWordList);
         System.out.println(secondWordList);
         List<String> result = findCommonWordsWithSpace(firstWordList, secondWordList);
-        //按要求输出到命令行
+
         System.out.println(result);
     }
 
     public static List<String> findCommonWordsWithSpace(String firstWordList, String secondWordList) {
-        //在这编写实现代码
         firstWordList = firstWordList.toLowerCase();
         secondWordList = secondWordList.toLowerCase();
 
@@ -53,14 +51,13 @@ public class GrammarExercise {
         List<String> res = firstList.stream()
                 .filter(secondList::contains).distinct().sorted(String.CASE_INSENSITIVE_ORDER).collect(Collectors.toList())
                 .stream().map(String::toUpperCase).map(str -> {
-                    String r = "";
+                    StringBuilder r = new StringBuilder();
                     for (int i = 0; i < str.length() - 1; i++) {
-                        r = r + str.charAt(i) + " ";
+                        r.append(str.charAt(i)).append(" ");
                     }
-                    r += str.charAt(str.length() - 1);
-                    return r;
+                    r.append(str.charAt(str.length() - 1));
+                    return r.toString();
                 }).distinct().collect(Collectors.toList());
-        ;
 
         System.out.println(res);
         return res;
